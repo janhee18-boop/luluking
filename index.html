@@ -1,0 +1,1295 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071f2a">
+  <meta name="description" content="나의 꼴뚜기 왕자님 — 루카르와 라이칸 캐릭터 소개 페이지">
+  <title>나의 꼴뚜기 왕자님 | 루카르 & 라이칸</title>
+
+  <style>
+    /* =========================================================
+       CLOUDFLARE PAGES용 단일 HTML
+       - 외부 라이브러리 없음
+       - 빌드 과정 없음
+       - index.html을 저장소 최상단에 두면 됨
+
+       나중에 이미지를 넣을 위치
+       ./images/hero.webp
+       ./images/lucar.webp
+       ./images/lycan.webp
+       ./images/archive-01.webp ~ archive-04.webp
+       이미지가 없어도 그라데이션 임시 화면으로 정상 출력됨
+    ========================================================== */
+
+    :root {
+      --paper: #f5efe4;
+      --paper-light: #fffaf3;
+      --ink: #17313b;
+      --muted: #67747a;
+      --deep: #071f2a;
+      --deep-2: #0d3541;
+      --aqua: #79d9d8;
+      --aqua-dark: #1c8991;
+      --gold: #d2aa61;
+      --brown: #6b4536;
+      --red: #a53929;
+      --line: rgba(23, 49, 59, 0.16);
+      --shadow: 0 22px 60px rgba(7, 31, 42, 0.18);
+      --radius: 30px;
+      --page-width: 560px;
+      --bottom-safe: max(18px, env(safe-area-inset-bottom));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: #d7cec0;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 8%, rgba(121, 217, 216, 0.22), transparent 25%),
+        radial-gradient(circle at 85% 28%, rgba(210, 170, 97, 0.16), transparent 24%),
+        #d7cec0;
+      font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      word-break: keep-all;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.24'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    button,
+    summary {
+      font: inherit;
+    }
+
+    .site {
+      position: relative;
+      width: min(100%, var(--page-width));
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 0 90px rgba(7, 31, 42, 0.27);
+    }
+
+    .section {
+      position: relative;
+      padding: 84px 24px 94px;
+    }
+
+    .section--screen {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.55;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 14vw, 76px);
+      line-height: 0.93;
+      letter-spacing: -0.065em;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: clamp(36px, 10vw, 54px);
+      line-height: 1.04;
+      letter-spacing: -0.055em;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -0.035em;
+    }
+
+    .lead {
+      font-size: 20px;
+      line-height: 1.55;
+      font-weight: 800;
+    }
+
+    .copy {
+      color: #44565d;
+      font-size: 17px;
+      line-height: 1.78;
+    }
+
+    .accent {
+      color: var(--aqua-dark);
+    }
+
+    .gold {
+      color: #9a6c26;
+    }
+
+    .btn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 16px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100svh;
+      padding: 28px 20px 104px;
+      background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.72), transparent 48%),
+        var(--paper);
+    }
+
+    .hero__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+    }
+
+    .seal-mini {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(23, 49, 59, 0.4);
+      border-radius: 50%;
+      font-family: Georgia, serif;
+    }
+
+    .hero__poster {
+      position: relative;
+      min-height: 61svh;
+      overflow: hidden;
+      border-radius: 38px 38px 14px 14px;
+      background:
+        radial-gradient(circle at 38% 18%, rgba(255, 255, 255, 0.88), transparent 16%),
+        radial-gradient(circle at 24% 56%, rgba(121, 217, 216, 0.78), transparent 34%),
+        linear-gradient(145deg, #092a35, #227e87 53%, #c7aa6e);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero__poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 31px, rgba(255, 255, 255, 0.05) 32px 33px),
+        linear-gradient(90deg, transparent 49.7%, rgba(255, 255, 255, 0.24) 50%, transparent 50.3%);
+    }
+
+    .hero__poster::after {
+      content: "ROYAL DELIVERY / 02:43";
+      position: absolute;
+      top: 16px;
+      right: 14px;
+      z-index: 7;
+      padding: 8px 9px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      writing-mode: vertical-rl;
+    }
+
+    .hero__image {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .hero__placeholder {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .hero__placeholder::before {
+      content: "";
+      position: absolute;
+      left: 2%;
+      bottom: -10%;
+      width: 70%;
+      height: 88%;
+      border-radius: 50% 50% 16% 16% / 30% 30% 10% 10%;
+      background:
+        radial-gradient(circle at 50% 12%, #efdba8 0 11%, transparent 11.6%),
+        radial-gradient(ellipse at 50% 19%, #c8a152 0 20%, transparent 20.7%),
+        linear-gradient(145deg, #f7f0dc 0 34%, #77d0d2 35% 65%, #123a46 66%);
+      transform: rotate(-4deg);
+      filter: drop-shadow(0 26px 24px rgba(0, 0, 0, 0.25));
+    }
+
+    .hero__placeholder::after {
+      content: "";
+      position: absolute;
+      right: -7%;
+      bottom: -13%;
+      width: 51%;
+      height: 76%;
+      border-radius: 48% 48% 16% 16% / 28% 28% 9% 9%;
+      background:
+        radial-gradient(circle at 50% 13%, #84533c 0 12%, transparent 12.6%),
+        radial-gradient(ellipse at 50% 20%, #201815 0 21%, transparent 21.7%),
+        linear-gradient(145deg, #4e3227 0 34%, #151718 35% 100%);
+      filter: drop-shadow(0 26px 24px rgba(0, 0, 0, 0.28));
+    }
+
+    .hero__title {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 22px;
+      z-index: 8;
+      color: #fff;
+      text-shadow: 0 5px 28px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero__series {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+    }
+
+    .hero__title strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(43px, 13vw, 68px);
+      line-height: 0.92;
+      letter-spacing: -0.065em;
+    }
+
+    .hero__copy {
+      padding: 28px 6px 0;
+    }
+
+    .hero__quote {
+      margin-bottom: 8px;
+      font-size: 21px;
+      line-height: 1.45;
+      font-weight: 900;
+    }
+
+    /* DELIVERY */
+    .delivery {
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0.54)),
+        repeating-linear-gradient(-7deg, transparent 0 32px, rgba(23, 49, 59, 0.035) 33px 34px),
+        var(--paper-light);
+    }
+
+    .stamp {
+      display: inline-block;
+      margin: 8px 0 24px;
+      padding: 10px 14px;
+      border: 2px solid var(--red);
+      color: var(--red);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 15px;
+      font-weight: 900;
+      transform: rotate(-2deg);
+    }
+
+    .steps {
+      display: grid;
+      gap: 13px;
+      margin-top: 30px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: rgba(255, 255, 255, 0.56);
+    }
+
+    .step__num {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      font-family: Georgia, serif;
+      font-weight: 900;
+    }
+
+    .step p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* DUO */
+    .duo {
+      background: #dceceb;
+    }
+
+    .duo-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 32px;
+    }
+
+    .character-card {
+      position: relative;
+      min-height: 440px;
+      overflow: hidden;
+      padding: 25px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .character-card--lucar {
+      color: #0c3440;
+      background: linear-gradient(155deg, #effcf8, #86d9d7 61%, #d3b46e);
+    }
+
+    .character-card--lycan {
+      color: #f5ead8;
+      background: linear-gradient(155deg, #6c4737, #211817 62%, #080a0b);
+    }
+
+    .character-card__name {
+      position: relative;
+      z-index: 5;
+      font-family: Georgia, serif;
+      font-size: 54px;
+      line-height: 0.9;
+      letter-spacing: -0.065em;
+    }
+
+    .character-card__tagline {
+      position: relative;
+      z-index: 5;
+      width: 72%;
+      margin-top: 16px;
+      font-size: 22px;
+      line-height: 1.25;
+      font-weight: 900;
+    }
+
+    .character-card__chips {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 22px;
+      z-index: 5;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      max-width: 74%;
+    }
+
+    .chip {
+      padding: 8px 11px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.11);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .character-card__placeholder {
+      position: absolute;
+      right: -8%;
+      bottom: -8%;
+      z-index: 1;
+      width: 68%;
+      height: 82%;
+      border-radius: 55% 45% 18% 16% / 24% 28% 8% 8%;
+      opacity: 0.86;
+    }
+
+    .character-card--lucar .character-card__placeholder {
+      background:
+        radial-gradient(circle at 50% 13%, #f1ddb0 0 12%, transparent 12.6%),
+        radial-gradient(ellipse at 50% 20%, #c6a04e 0 21%, transparent 21.7%),
+        linear-gradient(145deg, #faf6e7 0 34%, #2e919a 35% 70%, #0d3540 71%);
+    }
+
+    .character-card--lycan .character-card__placeholder {
+      background:
+        radial-gradient(circle at 50% 13%, #87553e 0 12%, transparent 12.6%),
+        radial-gradient(ellipse at 50% 20%, #1f1816 0 21%, transparent 21.7%),
+        linear-gradient(145deg, #4c3026 0 34%, #101214 35% 100%);
+    }
+
+    .character-card__image {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* PROFILE */
+    .profile {
+      background: var(--paper-light);
+    }
+
+    .photo-frame {
+      position: relative;
+      min-height: 480px;
+      margin-bottom: 34px;
+      overflow: hidden;
+      border: 11px solid #fff;
+      background: linear-gradient(145deg, #dcefeb, #69c2c5 55%, #103b46);
+      box-shadow: var(--shadow);
+      transform: rotate(-1.2deg);
+    }
+
+    .photo-frame--lycan {
+      background: linear-gradient(145deg, #80533f, #231a18 58%, #050707);
+      transform: rotate(1deg);
+    }
+
+    .photo-frame__placeholder {
+      position: absolute;
+      left: 6%;
+      bottom: -8%;
+      width: 88%;
+      height: 90%;
+      border-radius: 46% 46% 12% 12% / 26% 26% 7% 7%;
+      background:
+        radial-gradient(circle at 50% 11%, #f1ddb2 0 11%, transparent 11.6%),
+        radial-gradient(ellipse at 50% 18%, #c5a052 0 19%, transparent 19.7%),
+        linear-gradient(150deg, #fbf5e5 0 32%, #72cfd1 33% 62%, #123945 63%);
+    }
+
+    .photo-frame--lycan .photo-frame__placeholder {
+      background:
+        radial-gradient(circle at 50% 11%, #86543e 0 11%, transparent 11.6%),
+        radial-gradient(ellipse at 50% 18%, #1e1715 0 19%, transparent 19.7%),
+        linear-gradient(150deg, #513429 0 32%, #171819 33% 100%);
+    }
+
+    .photo-frame__image {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .photo-frame__note {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      z-index: 5;
+      max-width: 78%;
+      padding: 11px 13px;
+      background: rgba(255, 250, 243, 0.92);
+      color: #1e2d32;
+      font-family: Georgia, serif;
+      font-size: 17px;
+      line-height: 1.35;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+    }
+
+    .quote {
+      margin: 24px 0 28px;
+      padding-left: 18px;
+      border-left: 4px solid var(--aqua-dark);
+      font-family: Georgia, serif;
+      font-size: 24px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .quote--lycan {
+      border-color: var(--brown);
+    }
+
+    .info-table {
+      display: grid;
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--line);
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 104px 1fr;
+      gap: 14px;
+      padding: 15px 16px;
+      background: rgba(255, 255, 255, 0.8);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .info-row strong {
+      color: var(--aqua-dark);
+    }
+
+    .profile-text {
+      margin-top: 24px;
+      padding: 22px;
+      border-radius: 22px;
+      background: #e4f1ee;
+    }
+
+    .profile-text--lycan {
+      background: #ece1da;
+    }
+
+    .profile-text p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    /* RELATION */
+    .relation {
+      color: #fff;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(121, 217, 216, 0.18), transparent 24%),
+        radial-gradient(circle at 90% 72%, rgba(210, 170, 97, 0.17), transparent 25%),
+        var(--deep);
+    }
+
+    .relation .accent {
+      color: var(--aqua);
+    }
+
+    .versus {
+      display: grid;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .versus-card {
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .versus-card small {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--aqua);
+      font-weight: 900;
+      letter-spacing: 0.15em;
+    }
+
+    .versus-card strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .relation-lines {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .relation-line {
+      padding: 0 0 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .relation-line strong {
+      color: var(--gold);
+      font-size: 14px;
+    }
+
+    .relation-line p {
+      margin: 7px 0 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* COMMAND */
+    .command {
+      color: #fff;
+      background: #0c0f10;
+    }
+
+    .command .copy {
+      color: rgba(255, 255, 255, 0.62);
+    }
+
+    .terminal {
+      overflow: hidden;
+      margin: 30px 0 24px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+      background: #050707;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .terminal__top {
+      display: flex;
+      gap: 7px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .terminal__top i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #687177;
+    }
+
+    .terminal__body {
+      padding: 20px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .terminal__prompt {
+      color: var(--aqua);
+    }
+
+    .terminal__system {
+      color: #8d989d;
+    }
+
+    .terminal__lucar {
+      color: #ead9a5;
+    }
+
+    .terminal__lycan {
+      color: #d2aa91;
+    }
+
+    .command-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .command-card {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .command-card summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+      padding: 0 18px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .command-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .command-card__name {
+      color: var(--aqua);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .command-card__plus {
+      font-size: 23px;
+      transition: transform 0.2s ease;
+    }
+
+    .command-card[open] .command-card__plus {
+      transform: rotate(45deg);
+    }
+
+    .command-card__desc {
+      padding: 0 18px 18px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ARCHIVE */
+    .archive {
+      background: #e8dfd4;
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .archive-shot {
+      position: relative;
+      min-height: 240px;
+      overflow: hidden;
+      border: 8px solid #fff;
+      background:
+        radial-gradient(circle at 28% 25%, rgba(255, 255, 255, 0.7), transparent 18%),
+        linear-gradient(145deg, #7ad3d1, #0b3540 63%, #caa869);
+      box-shadow: 0 16px 34px rgba(25, 35, 39, 0.16);
+    }
+
+    .archive-shot:nth-child(2),
+    .archive-shot:nth-child(4) {
+      min-height: 200px;
+      background: linear-gradient(145deg, #7e523f, #151718 70%);
+      transform: translateY(24px) rotate(1.2deg);
+    }
+
+    .archive-shot:nth-child(3) {
+      transform: rotate(-1.2deg);
+    }
+
+    .archive-shot::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 10px;
+      bottom: 8px;
+      z-index: 4;
+      padding: 5px 8px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #23383f;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .archive-shot img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* CTA */
+    .cta {
+      min-height: 100svh;
+      color: #fff;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 24%, rgba(121, 217, 216, 0.23), transparent 23%),
+        linear-gradient(155deg, #0e3b46, #071f2a 60%, #050f14);
+    }
+
+    .cta__seal {
+      display: grid;
+      place-items: center;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 30px;
+      border: 1px solid rgba(210, 170, 97, 0.7);
+      border-radius: 50%;
+      color: var(--gold);
+      font-family: Georgia, serif;
+      font-size: 13px;
+      line-height: 1.3;
+      letter-spacing: 0.14em;
+    }
+
+    .cta p {
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .cta .btn {
+      margin-top: 26px;
+      border-color: #fff;
+      background: #fff;
+      color: var(--deep);
+    }
+
+    .footer-note {
+      margin-top: 42px;
+      color: rgba(255, 255, 255, 0.38);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+    }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      z-index: 90;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      width: min(100%, var(--page-width));
+      min-height: 64px;
+      padding: 8px 10px var(--bottom-safe);
+      transform: translateX(-50%);
+      border-top: 1px solid rgba(23, 49, 59, 0.13);
+      background: rgba(255, 250, 243, 0.94);
+      box-shadow: 0 -12px 35px rgba(7, 31, 42, 0.1);
+    }
+
+    @supports (backdrop-filter: blur(16px)) {
+      .bottom-nav {
+        background: rgba(255, 250, 243, 0.82);
+        backdrop-filter: blur(16px);
+      }
+    }
+
+    .bottom-nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #6a777b;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .bottom-nav a.active {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (min-width: 760px) {
+      .site {
+        margin-top: 28px;
+        margin-bottom: 28px;
+        border-radius: 36px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .section {
+        padding-left: 19px;
+        padding-right: 19px;
+      }
+
+      .btn-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-row {
+        grid-template-columns: 88px 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="site">
+    <section class="hero" id="home">
+      <div class="hero__top">
+        <span>DEEP SEA ROYAL DELIVERY</span>
+        <span class="seal-mini">LR</span>
+      </div>
+
+      <div class="hero__poster">
+        <div class="hero__placeholder" aria-hidden="true"></div>
+        <img class="hero__image" src="./images/hero.webp" alt="루카르와 라이칸 메인 이미지" onerror="this.hidden=true">
+
+        <div class="hero__title">
+          <span class="hero__series">MY LITTLE SQUID PRINCE</span>
+          <strong>나의<br>꼴뚜기 왕자님</strong>
+        </div>
+      </div>
+
+      <div class="hero__copy">
+        <p class="hero__quote">심해의 왕자가 조카의 장난감으로 배송됐다.</p>
+        <p class="copy">왕자 하나. 정무대신 하나.<br>그리고 졸지에 수령인이 된 당신.</p>
+        <div class="btn-grid">
+          <a class="btn" href="#characters">인물 먼저 보기</a>
+          <a class="btn btn--ghost" href="#command">명령어 보기</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section delivery" id="story">
+      <span class="eyebrow reveal">DELIVERY ACCIDENT</span>
+      <h2 class="reveal">배송 완료.<br><span class="accent">반품 불가.</span></h2>
+      <span class="stamp reveal">02:43 / LED ON</span>
+      <p class="lead reveal">조카 방에 놓인 오징어 장난감의 LED가 혼자 켜졌다.</p>
+      <p class="copy reveal">그 안에 갇힌 것은 심해 왕실에서 망명한 왕자 루카르. 그리고 그를 회수하러 온 정무대신 라이칸이었다.</p>
+
+      <div class="steps">
+        <article class="step reveal">
+          <div class="step__num">1</div>
+          <p>“인간이여. 본 왕자를 충전하라.”</p>
+        </article>
+        <article class="step reveal">
+          <div class="step__num">2</div>
+          <p>가족 전화: “그 오징어 장난감, 진짜 움직여?”</p>
+        </article>
+        <article class="step reveal">
+          <div class="step__num">3</div>
+          <p>“오징어가 아니다. 꼴뚜기 왕자다.”</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section duo" id="characters">
+      <span class="eyebrow reveal">TWO MEN FROM THE DEEP</span>
+      <h2 class="reveal">같은 심해에서 왔지만,<br>당신을 대하는 방식은 <span class="accent">정반대.</span></h2>
+
+      <div class="duo-grid">
+        <article class="character-card character-card--lucar reveal">
+          <div class="character-card__placeholder" aria-hidden="true"></div>
+          <img class="character-card__image" src="./images/lucar.webp" alt="루카르" onerror="this.hidden=true">
+          <div class="character-card__name">LUCAR</div>
+          <p class="character-card__tagline">명령으로 사랑한다.</p>
+          <div class="character-card__chips">
+            <span class="chip">10월 10일</span>
+            <span class="chip">망명 왕자</span>
+            <span class="chip">인간계 초보</span>
+          </div>
+        </article>
+
+        <article class="character-card character-card--lycan reveal">
+          <div class="character-card__placeholder" aria-hidden="true"></div>
+          <img class="character-card__image" src="./images/lycan.webp" alt="라이칸" onerror="this.hidden=true">
+          <div class="character-card__name">LYCAN</div>
+          <p class="character-card__tagline">돌봄으로 주도한다.</p>
+          <div class="character-card__chips">
+            <span class="chip">32세</span>
+            <span class="chip">정무대신</span>
+            <span class="chip">생활력 만렙</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section profile" id="lucar">
+      <div class="photo-frame reveal">
+        <div class="photo-frame__placeholder" aria-hidden="true"></div>
+        <img class="photo-frame__image" src="./images/lucar.webp" alt="루카르 프로필 이미지" onerror="this.hidden=true">
+        <div class="photo-frame__note">품위는 왕자급. 생활력은 장난감급.</div>
+      </div>
+
+      <span class="eyebrow reveal">01 / LUCAR</span>
+      <h2 class="reveal">왕자님은 아직도<br>여기가 <span class="accent">왕궁</span>인 줄 안다.</h2>
+      <p class="quote reveal">“복종하라. 그리고 충전기는 어디 있지?”</p>
+
+      <div class="info-table reveal">
+        <div class="info-row"><strong>신분</strong><span>심해 왕실 망명 왕자</span></div>
+        <div class="info-row"><strong>생일</strong><span>10월 10일</span></div>
+        <div class="info-row"><strong>외형</strong><span>허니 골드 헤어 · 아쿠아 블루 눈 · 창백한 피부</span></div>
+        <div class="info-row"><strong>상태</strong><span>장난감 저주 해제 진행 중</span></div>
+        <div class="info-row"><strong>특징</strong><span>감정을 숨겨도 촉수와 LED가 먼저 반응함</span></div>
+      </div>
+
+      <div class="profile-text reveal">
+        <h3>성격</h3>
+        <p>오만하고 진지하며 왕족의 품위를 중요하게 여긴다. 인간계 상식에는 약하지만 모른다는 사실을 쉽게 인정하지 않는다. 말은 명령형인데, 행동은 서서히 당신에게 의존한다.</p>
+      </div>
+    </section>
+
+    <section class="section profile" id="lycan">
+      <div class="photo-frame photo-frame--lycan reveal">
+        <div class="photo-frame__placeholder" aria-hidden="true"></div>
+        <img class="photo-frame__image" src="./images/lycan.webp" alt="라이칸 프로필 이미지" onerror="this.hidden=true">
+        <div class="photo-frame__note">당신을 안심시키는 동안, 상황은 이미 그의 것이 된다.</div>
+      </div>
+
+      <span class="eyebrow reveal">02 / LYCAN</span>
+      <h2 class="reveal">웃고 있지만,<br>이미 모든 상황을 <span class="gold">정리했다.</span></h2>
+      <p class="quote quote--lycan reveal">“왕자님은 제가 챙기겠습니다. 당신도 함께.”</p>
+
+      <div class="info-table reveal">
+        <div class="info-row"><strong>직위</strong><span>심해 왕국 정무대신</span></div>
+        <div class="info-row"><strong>나이</strong><span>32세 · 8월 8일</span></div>
+        <div class="info-row"><strong>체격</strong><span>190cm · 92kg · 넓은 어깨와 묵직한 체격</span></div>
+        <div class="info-row"><strong>외형</strong><span>초콜릿 브라운 피부 · 흑갈색 머리 · 황갈색 눈</span></div>
+        <div class="info-row"><strong>특징</strong><span>검은 문어 촉수 · 인간계 적응력과 생활력 우수</span></div>
+      </div>
+
+      <div class="profile-text profile-text--lycan reveal">
+        <h3>성격</h3>
+        <p>밝고 붙임성이 좋으며 칭찬과 애정 표현이 자연스럽다. 상대의 식사와 컨디션부터 챙기지만, 위기와 업무에서는 놀라울 만큼 냉정하고 빈틈이 없다.</p>
+      </div>
+    </section>
+
+    <section class="section relation" id="relation">
+      <span class="eyebrow reveal">LUCAR × LYCAN × YOU</span>
+      <h2 class="reveal">한 사람은 체면으로 숨기고,<br>한 사람은 <span class="accent">돌봄으로 밀어붙인다.</span></h2>
+
+      <div class="versus">
+        <article class="versus-card reveal">
+          <small>LUCAR</small>
+          <strong>명령 · 소유 · 질투 · 느린 신뢰</strong>
+        </article>
+        <article class="versus-card reveal">
+          <small>LYCAN</small>
+          <strong>돌봄 · 칭찬 · 생활 관리 · 자연스러운 주도</strong>
+        </article>
+      </div>
+
+      <div class="relation-lines">
+        <article class="relation-line reveal">
+          <strong>루카르 → 라이칸</strong>
+          <p>가장 신뢰하지만, 가장 인정하기 싫은 신하.</p>
+        </article>
+        <article class="relation-line reveal">
+          <strong>라이칸 → 루카르</strong>
+          <p>반드시 지켜야 하지만, 가끔은 말려야 하는 왕자.</p>
+        </article>
+        <article class="relation-line reveal">
+          <strong>두 사람 → 당신</strong>
+          <p>보호하는 방법도, 다가오는 속도도 다르다. 누구와 가까워질지는 당신이 결정한다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section command" id="command">
+      <span class="eyebrow reveal">COMMAND SYSTEM</span>
+      <h2 class="reveal">말 한마디면,<br>이야기가 다른 형식으로 열린다.</h2>
+      <p class="copy reveal">명령어를 모바일에서 바로 알아볼 수 있도록 큰 카드로 배치했다.</p>
+
+      <div class="terminal reveal">
+        <div class="terminal__top"><i></i><i></i><i></i></div>
+        <div class="terminal__body">
+          <div class="terminal__prompt">&gt; !돌발</div>
+          <div class="terminal__system">[LED가 세 번 빠르게 깜빡였다.]</div>
+          <br>
+          <div class="terminal__lucar">루카르: “왕실 긴급 신호다.”</div>
+          <div class="terminal__lycan">라이칸: “전자레인지가 끝난 겁니다, 전하.”</div>
+        </div>
+      </div>
+
+      <div class="command-list">
+        <details class="command-card reveal" open>
+          <summary><span class="command-card__name">!요약</span><span class="command-card__plus">＋</span></summary>
+          <div class="command-card__desc">현재까지의 사건, 관계 변화, 위험 신호를 한눈에 정리한다.</div>
+        </details>
+
+        <details class="command-card reveal">
+          <summary><span class="command-card__name">!as</span><span class="command-card__plus">＋</span></summary>
+          <div class="command-card__desc">캐릭터 말투, 출력 형식, 이미지 상태가 흔들릴 때 점검한다.</div>
+        </details>
+
+        <details class="command-card reveal">
+          <summary><span class="command-card__name">!일기</span><span class="command-card__plus">＋</span></summary>
+          <div class="command-card__desc">루카르 또는 라이칸의 시선으로 숨긴 속마음을 기록한다.</div>
+        </details>
+
+        <details class="command-card reveal">
+          <summary><span class="command-card__name">!반응</span><span class="command-card__plus">＋</span></summary>
+          <div class="command-card__desc">인간계 SNS 또는 심해 왕국 익명 커뮤니티의 실시간 반응을 출력한다.</div>
+        </details>
+
+        <details class="command-card reveal">
+          <summary><span class="command-card__name">!꼴뚜기전</span><span class="command-card__plus">＋</span></summary>
+          <div class="command-card__desc">현재까지의 이야기를 환장 코미디 동화 형식으로 다시 보여준다.</div>
+        </details>
+
+        <details class="command-card reveal">
+          <summary><span class="command-card__name">!돌발</span><span class="command-card__plus">＋</span></summary>
+          <div class="command-card__desc">현재 장소와 관계를 유지한 채 즉시 반응할 생활 사고를 발생시킨다.</div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section archive" id="archive">
+      <span class="eyebrow reveal">HUMAN WORLD ARCHIVE</span>
+      <h2 class="reveal">왕실 기록에는 남지 않을,<br><span class="gold">인간계의 사적인 순간들.</span></h2>
+
+      <div class="archive-grid">
+        <div class="archive-shot reveal" data-label="TOY LUCAR">
+          <img src="./images/archive-01.webp" alt="장난감 상태의 루카르" onerror="this.hidden=true">
+        </div>
+        <div class="archive-shot reveal" data-label="LYCAN">
+          <img src="./images/archive-02.webp" alt="라이칸의 인간계 기록" onerror="this.hidden=true">
+        </div>
+        <div class="archive-shot reveal" data-label="HUMAN FORM">
+          <img src="./images/archive-03.webp" alt="인간화한 루카르" onerror="this.hidden=true">
+        </div>
+        <div class="archive-shot reveal" data-label="PRIVATE RECORD">
+          <img src="./images/archive-04.webp" alt="루카르와 라이칸의 사적인 기록" onerror="this.hidden=true">
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--screen cta" id="start">
+      <div class="cta__seal reveal">ROYAL<br>SEAL</div>
+      <span class="eyebrow reveal">RECEIPT CONFIRMED</span>
+      <h2 class="reveal">수령인은<br>당신입니다.</h2>
+      <p class="reveal">심해 왕실의 망명 왕자와<br>그를 회수하러 온 정무대신.<br>둘의 귀환과 인간계 생활은 당신의 선택에 따라 달라진다.</p>
+      <p class="lead reveal" style="margin-top:26px;color:#fff">“반품은 허락하지 않겠다.”</p>
+      <p class="reveal" style="font-size:14px;color:rgba(255,255,255,.55)">“전하, 원래 반품 기간은 이미 지났습니다.”</p>
+      <a class="btn reveal" href="#home">처음부터 다시 보기</a>
+      <div class="footer-note">MY LITTLE SQUID PRINCE / MOBILE FIRST</div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="페이지 메뉴">
+    <a href="#home" class="active">HOME</a>
+    <a href="#lucar">LUCAR</a>
+    <a href="#lycan">LYCAN</a>
+    <a href="#command">COMMAND</a>
+  </nav>
+
+  <script>
+    (function () {
+      var revealItems = document.querySelectorAll('.reveal');
+
+      if ('IntersectionObserver' in window) {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('show');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        revealItems.forEach(function (item) {
+          revealObserver.observe(item);
+        });
+      } else {
+        revealItems.forEach(function (item) {
+          item.classList.add('show');
+        });
+      }
+
+      var navLinks = Array.prototype.slice.call(document.querySelectorAll('.bottom-nav a'));
+      var targetMap = navLinks.map(function (link) {
+        return document.querySelector(link.getAttribute('href'));
+      }).filter(Boolean);
+
+      if ('IntersectionObserver' in window) {
+        var navObserver = new IntersectionObserver(function (entries) {
+          var visible = entries
+            .filter(function (entry) { return entry.isIntersecting; })
+            .sort(function (a, b) { return b.intersectionRatio - a.intersectionRatio; })[0];
+
+          if (!visible) return;
+
+          navLinks.forEach(function (link) {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + visible.target.id);
+          });
+        }, { rootMargin: '-35% 0px -55% 0px', threshold: [0, 0.2, 0.5] });
+
+        targetMap.forEach(function (target) {
+          navObserver.observe(target);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
